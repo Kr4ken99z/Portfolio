@@ -132,3 +132,100 @@ sr.reveal(`.home__info div`, {delay: 600, origin: 'bottom', interval: 100})
 sr.reveal(`.skills__content:nth-child(1), .contact__content:nth-child(1)`, {origin: 'left'})
 sr.reveal(`.skills__content:nth-child(2), .contact__content:nth-child(2)`, {origin: 'right'})
 sr.reveal(`.qualification__content, .achievements__card`, {interval: 100})
+
+/*=============== CONTACT FORM WITH EMAILJS ===============*/
+// Initialize EmailJS when page loads
+window.addEventListener('DOMContentLoaded', () => {
+    // Check if CONFIG is available
+    if (typeof CONFIG !== 'undefined' && CONFIG.emailjs) {
+        // Initialize EmailJS with configuration
+        if (typeof initializeEmailJS === 'function') {
+            initializeEmailJS(CONFIG.emailjs);
+        }
+    } else {
+        console.warn('EmailJS configuration not found. Please check config.js');
+    }
+});
+
+// Handle contact form submission
+const contactForm = document.getElementById('contact-form');
+const contactMessage = document.getElementById('contact-message');
+const contactButton = contactForm?.querySelector('.contact__button');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Get form values
+        const formData = {
+            name: document.getElementById('contact-name').value.trim(),
+            email: document.getElementById('contact-email').value.trim(),
+            message: document.getElementById('contact-project').value.trim(),
+            subject: `Portfolio Contact from ${document.getElementById('contact-name').value.trim()}`
+        };
+        
+        // Validate form
+        if (!formData.name || !formData.email || !formData.message) {
+            showMessage('Please fill in all fields! ❌', 'error');
+            return;
+        }
+        
+        // Validate email format
+        if (typeof validateEmail === 'function' && !validateEmail(formData.email)) {
+            showMessage('Please enter a valid email address! ❌', 'error');
+            return;
+        }
+        
+        // Disable submit button and show loading state
+        if (contactButton) {
+            contactButton.disabled = true;
+            contactButton.innerHTML = 'Sending... <i class="ri-loader-4-line"></i>';
+        }
+        
+        try {
+            // Check if sendEmail function is available
+            if (typeof sendEmail !== 'function') {
+                throw new Error('Email service is not properly loaded');
+            }
+            
+            // Send email
+            const result = await sendEmail(formData);
+            
+            if (result.success) {
+                showMessage('Message sent successfully! ✅', 'success');
+                contactForm.reset();
+            } else {
+                showMessage(result.message || 'Failed to send message. Please try again! ❌', 'error');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showMessage('Oops! Something went wrong. Please try again later. ❌', 'error');
+        } finally {
+            // Re-enable submit button
+            if (contactButton) {
+                contactButton.disabled = false;
+                contactButton.innerHTML = 'Send <i class="ri-arrow-right-up-line"></i>';
+            }
+        }
+    });
+}
+
+/**
+ * Show message to user
+ * @param {string} message - Message to display
+ * @param {string} type - Message type ('success' or 'error')
+ */
+function showMessage(message, type = 'success') {
+    if (contactMessage) {
+        contactMessage.textContent = message;
+        contactMessage.style.color = type === 'success' ? '#4ade80' : '#f87171';
+        contactMessage.style.fontSize = '0.875rem';
+        contactMessage.style.marginTop = '0.5rem';
+        contactMessage.style.fontWeight = '500';
+        
+        // Clear message after 5 seconds
+        setTimeout(() => {
+            contactMessage.textContent = '';
+        }, 5000);
+    }
+}
