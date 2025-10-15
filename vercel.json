@@ -5,11 +5,5 @@
       "src": "**/*",
       "use": "@vercel/static"
     }
-  ],
-  "env": {
-    "EMAILJS_SERVICE_ID": "@emailjs-service-id",
-    "EMAILJS_TEMPLATE_ID": "@emailjs-template-id",
-    "EMAILJS_PUBLIC_KEY": "@emailjs-public-key",
-    "CONTACT_EMAIL": "@contact-email"
-  }
+  ]
 }

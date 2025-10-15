@@ -1,40 +1,29 @@
 /**
  * Configuration file for Portfolio
  * 
- * This file reads configuration from environment variables in production (Vercel)
- * and uses default values in development
+ * IMPORTANT: This file contains your actual EmailJS credentials
  * 
- * For local development:
- * - Update the default values below with your EmailJS credentials
+ * NOTE: EmailJS public keys are SAFE to use in browser-side code
+ * They are designed to be exposed in the client. EmailJS protects against abuse through:
+ * - Rate limiting
+ * - Domain restrictions (you can set in EmailJS dashboard)
+ * - CAPTCHA options
  * 
- * For Vercel deployment:
- * - Add environment variables in Vercel dashboard:
- *   EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, CONTACT_EMAIL
+ * Get your credentials from https://www.emailjs.com/
  */
-
-// Helper function to get environment variables (for Vercel)
-function getEnvVar(key, defaultValue) {
-    // In Vercel, environment variables are injected at build time
-    // For local development, use the default values
-    if (typeof process !== 'undefined' && process.env && process.env[key]) {
-        return process.env[key];
-    }
-    return defaultValue;
-}
 
 const CONFIG = {
     // EmailJS Configuration
-    // SETUP REQUIRED: Replace the default values with your actual credentials for local development
     emailjs: {
-        serviceId: getEnvVar('EMAILJS_SERVICE_ID', 'YOUR_SERVICE_ID'),        // Your EmailJS Service ID
-        templateId: getEnvVar('EMAILJS_TEMPLATE_ID', 'YOUR_TEMPLATE_ID'),      // Your EmailJS Template ID
-        publicKey: getEnvVar('EMAILJS_PUBLIC_KEY', 'YOUR_PUBLIC_KEY'),        // Your EmailJS Public Key
-        contactEmail: getEnvVar('CONTACT_EMAIL', 'your-email@example.com')  // Your email where you'll receive messages
+        serviceId: 'service_y67pssv',        // Your EmailJS Service ID
+        templateId: 'template_f13uyw4',      // Your EmailJS Template ID
+        publicKey: '5K3Pqk24YK_Jy1VL1',     // Your EmailJS Public Key
+        contactEmail: 'koustavmondal9641@gmail.com'  // Your email where you'll receive messages
     },
     
     // Site Configuration
     site: {
-        name: 'Koustav',
+        name: 'Koustav Mondal',
         title: 'Portfolio',
         description: 'Frontend Developer Portfolio'
     }
@@ -44,3 +33,4 @@ const CONFIG = {
 if (typeof window !== 'undefined') {
     window.CONFIG = CONFIG;
 }
+
