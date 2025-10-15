@@ -34,7 +34,7 @@ const CONFIG = {
     
     // Site Configuration
     site: {
-        name: 'Your Name',
+        name: 'Koustav',
         title: 'Portfolio',
         description: 'Frontend Developer Portfolio'
     }
