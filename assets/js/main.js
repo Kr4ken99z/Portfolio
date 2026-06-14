@@ -41,10 +41,38 @@ let swiperProjects = new Swiper(".projects__container", {
     breakpoints: {
         1200: {
             slidesPerView: 2,
-            spaceBetween: -56,
+            spaceBetween: 32,
         },
     },
   });
+
+/*=============== PROJECT LIVE LINKS ===============*/
+const projectCards = document.querySelectorAll('.projects__card[data-live-url]')
+
+projectCards.forEach(card => {
+    const openProject = () => {
+        const liveUrl = card.dataset.liveUrl
+
+        if (liveUrl) {
+            window.open(liveUrl, '_blank', 'noopener')
+        }
+    }
+
+    card.addEventListener('click', event => {
+        if (event.target.closest('a')) {
+            return
+        }
+
+        openProject()
+    })
+
+    card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            openProject()
+        }
+    })
+})
 
 /*=============== SWIPER TESTIMONIAL ===============*/
 
