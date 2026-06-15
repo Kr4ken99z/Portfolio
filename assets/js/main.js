@@ -1,3 +1,17 @@
+/*=============== DOWNLOAD CV ===============*/
+const downloadCvBtn = document.getElementById('download-cv')
+if(downloadCvBtn){
+    downloadCvBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        const link = document.createElement('a')
+        link.href = 'assets/pdf/Koustav_Mondal_Resume.pdf'
+        link.download = 'Koustav_Mondal_Resume.pdf'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    })
+}
+
 /*=============== SHOW MENU ===============*/
 const navMenu = document.getElementById('nav-menu'),
       navToggle = document.getElementById('nav-toggle'),
