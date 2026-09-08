@@ -12,8 +12,8 @@ export default function Projects() {
     <section className="py-12 md:py-18 border-b border-outline-variant/30" id="projects">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-mono text-xs text-primary uppercase tracking-widest font-semibold flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+        <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
           <span>FEATURED PROJECTS</span>
         </h2>
         <span className="font-mono text-xs text-text-muted">
@@ -26,12 +26,12 @@ export default function Projects() {
         {visibleProjects.map((project: Project, index) => (
           <div
             key={project.id}
-            className="group bg-surface-container-low border border-outline-variant/40 hover:border-primary/40 rounded-xl p-4 sm:p-5 transition-colors duration-150 flex flex-col justify-between"
+            className="group bg-surface-container-low border border-outline-variant/40 hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-colors duration-150 flex flex-col justify-between"
           >
             <div className="flex flex-col gap-2">
               {/* Top Row: Category + Direct Action Links */}
               <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] text-primary/80 font-medium">
+                <span className="font-mono text-[11px] text-text-muted font-medium">
                   0{index + 1} // {project.category}
                 </span>
 
@@ -106,11 +106,11 @@ export default function Projects() {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="px-4 py-2 rounded-lg bg-surface-container-low border border-outline-variant/60 hover:border-primary/60 text-on-surface font-mono text-xs hover:text-primary transition-all flex items-center gap-2 active:scale-95 group shadow-sm"
+            className="px-4 py-2 rounded-lg bg-surface-container-low border border-outline-variant/60 hover:border-outline-variant text-on-surface font-mono text-xs hover:text-white transition-all flex items-center gap-2 active:scale-95 group shadow-sm"
           >
             <span>{showAll ? "Show less projects" : "Show more projects"}</span>
             <ChevronDown
-              className={`w-3.5 h-3.5 text-on-surface-variant group-hover:text-primary transition-transform duration-200 ${
+              className={`w-3.5 h-3.5 text-on-surface-variant group-hover:text-white transition-transform duration-200 ${
                 showAll ? "rotate-180" : "group-hover:translate-y-0.5"
               }`}
             />

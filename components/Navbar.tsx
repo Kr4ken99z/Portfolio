@@ -24,13 +24,13 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="font-mono text-sm sm:text-base font-semibold tracking-tight text-on-surface hover:text-primary transition-colors flex items-center gap-0.5 group"
+            className="font-mono text-sm sm:text-base font-semibold tracking-tight text-on-surface hover:text-white transition-colors flex items-center gap-0.5 group"
           >
             <span className="text-text-muted select-none">~/</span>
             <HyperText
               text="devkoustav"
               duration={700}
-              className="font-semibold text-on-surface group-hover:text-primary transition-colors"
+              className="font-semibold text-on-surface group-hover:text-white transition-colors"
             />
           </Link>
           <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/40">
@@ -89,7 +89,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="font-mono text-sm py-1.5 text-on-surface-variant hover:text-primary transition-colors"
+              className="font-mono text-sm py-1.5 text-on-surface-variant hover:text-on-surface transition-colors"
             >
               {link.label}
             </a>

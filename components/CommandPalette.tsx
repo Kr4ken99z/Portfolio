@@ -80,7 +80,7 @@ export default function CommandPalette() {
           particleCount: 30,
           spread: 45,
           origin: { y: 0.8 },
-          colors: ["#10B981", "#4EDEA3", "#FFFFFF"],
+          colors: ["#FFFFFF", "#D4D4D8", "#A1A1AA"],
         });
       } catch {}
       setTimeout(() => setCopied(false), 2000);
@@ -251,13 +251,13 @@ export default function CommandPalette() {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-surface-container-low/95 backdrop-blur-md border border-outline-variant/60 hover:border-primary/60 text-on-surface shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
+          className="group flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-surface-container-low/95 backdrop-blur-md border border-outline-variant/60 hover:border-outline text-on-surface shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
           aria-label="Open Command Palette"
           title="Open Command Palette (Ctrl+K)"
         >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span className="w-2 h-2 rounded-full bg-text-muted animate-pulse"></span>
           <span className="font-mono text-xs text-on-surface font-medium">Contact</span>
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border border-outline-variant/60 bg-surface-container font-mono text-[10px] text-text-muted group-hover:text-primary group-hover:border-primary/40 transition-colors">
+          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border border-outline-variant/60 bg-surface-container font-mono text-[10px] text-text-muted group-hover:text-on-surface group-hover:border-outline-variant transition-colors">
             <span>{isMac ? "⌘" : "Ctrl"}</span>
             <span>K</span>
           </kbd>
@@ -276,7 +276,7 @@ export default function CommandPalette() {
           >
             {/* Search Input Bar */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-outline-variant/50">
-              <Search className="w-4 h-4 text-primary shrink-0" />
+              <Search className="w-4 h-4 text-on-surface-variant shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -310,14 +310,14 @@ export default function CommandPalette() {
                         key={item.id}
                         type="button"
                         onClick={item.action}
-                        className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container hover:text-primary transition-colors text-left group cursor-pointer"
+                        className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-surface-container hover:text-white transition-colors text-left group cursor-pointer"
                       >
                         <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant/50 flex items-center justify-center shrink-0 group-hover:border-primary/50 text-text-muted group-hover:text-primary transition-colors">
+                          <div className="w-8 h-8 rounded-lg bg-surface-container border border-outline-variant/50 flex items-center justify-center shrink-0 group-hover:border-outline text-text-muted group-hover:text-white transition-colors">
                             <IconComponent className="w-4 h-4" />
                           </div>
                           <div className="min-w-0">
-                            <p className="font-mono text-xs sm:text-[13px] font-medium text-on-surface group-hover:text-primary truncate">
+                            <p className="font-mono text-xs sm:text-[13px] font-medium text-on-surface group-hover:text-white truncate">
                               {item.title}
                             </p>
                             <p className="font-mono text-[11px] text-text-muted truncate">
@@ -328,7 +328,7 @@ export default function CommandPalette() {
 
                         <div className="shrink-0 flex items-center gap-1.5 ml-2">
                           {item.isExternal && (
-                            <ArrowUpRight className="w-3.5 h-3.5 text-text-muted group-hover:text-primary" />
+                            <ArrowUpRight className="w-3.5 h-3.5 text-text-muted group-hover:text-white" />
                           )}
                           {item.shortcut && (
                             <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/40">

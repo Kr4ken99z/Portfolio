@@ -42,9 +42,9 @@ export default function QuoteCard() {
 
   return (
     <div className="py-10 border-b border-outline-variant/30 flex items-center justify-center">
-      <div className="w-full p-5 sm:p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-primary/40 transition-colors shadow-sm relative group">
+      <div className="w-full p-5 sm:p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-outline-variant transition-colors shadow-sm relative group">
         <div className="flex items-start gap-3 min-w-0">
-          <span className="font-mono text-primary text-base select-none mt-0.5 shrink-0">
+          <span className="font-mono text-text-muted text-base select-none mt-0.5 shrink-0">
             “
           </span>
           <div>
@@ -59,7 +59,7 @@ export default function QuoteCard() {
               suppressHydrationWarning
             >
               <span>—</span>
-              <span className="text-primary font-medium">
+              <span className="text-on-surface font-medium">
                 {mounted ? currentQuote.author : QUOTES[0].author}
               </span>
             </p>

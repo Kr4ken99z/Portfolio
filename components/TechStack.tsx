@@ -40,8 +40,8 @@ export default function TechStack() {
   return (
     <section className="py-12 md:py-16 border-b border-outline-variant/30" id="stack">
       {/* Title Header */}
-      <h2 className="font-mono text-xs text-primary uppercase tracking-widest font-semibold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+      <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold mb-6 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
         <span>TECH STACK</span>
       </h2>
 

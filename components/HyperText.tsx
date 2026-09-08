@@ -70,15 +70,14 @@ export default function HyperText({
       const progress = Math.min(elapsed / duration, 1);
       iterations.current = progress * length;
 
-      setDisplayText(() =>
-        text.split("").map((char, index) => {
-          if (char === " ") return " ";
-          if (index <= iterations.current) {
-            return text[index];
-          }
-          return DEFAULT_CHARSET[Math.floor(Math.random() * DEFAULT_CHARSET.length)];
-        })
-      );
+      const nextChars = text.split("").map((char, index) => {
+        if (char === " ") return " ";
+        if (index <= iterations.current) {
+          return text[index];
+        }
+        return DEFAULT_CHARSET[Math.floor(Math.random() * DEFAULT_CHARSET.length)];
+      });
+      setDisplayText(nextChars);
 
       if (progress < 1) {
         animationFrameId.current = requestAnimationFrame(animate);

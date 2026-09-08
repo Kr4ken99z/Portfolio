@@ -113,8 +113,8 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
 
 /* Text Selection */
 ::selection {
-  background-color: rgba(16, 185, 129, 0.25);
-  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: inherit;
 }
 
 /* Subtle dot-grid pattern helper */
@@ -129,7 +129,7 @@ html:not(.dark) .bg-dot-grid {
 }
 
 .bg-dot-grid-dense {
-  background-image: radial-gradient(var(--primary) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
