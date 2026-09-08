@@ -132,3 +132,44 @@ html:not(.dark) .bg-dot-grid {
   background-image: radial-gradient(var(--primary) 1px, transparent 1px);
   background-size: 10px 10px;
 }
+
+/* Cosmic Orbit Animations (Anjishnu Style) */
+@keyframes cosmic-orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cosmic-orbit-counter-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-orbit-slow {
+  animation: cosmic-orbit-rotate 55s linear infinite;
+}
+
+.animate-orbit-medium {
+  animation: cosmic-orbit-rotate 35s linear infinite;
+}
+
+.animate-counter-rotate-slow {
+  animation: cosmic-orbit-counter-rotate 55s linear infinite;
+}
+
+.animate-counter-rotate-medium {
+  animation: cosmic-orbit-counter-rotate 35s linear infinite;
+}
+
+.pause-on-hover:hover,
+.pause-on-hover:has(:hover) {
+  animation-play-state: paused;
+}
+
