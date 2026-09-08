@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root, html.dark {
+  color-scheme: dark;
+  --primary-rgb: 59 130 246;
+  --primary: #3B82F6;
+  --background-rgb: 0 0 0;
+  --surface-rgb: 0 0 0;
+  --surface-container-rgb: 10 10 10;
+  --surface-container-low-rgb: 0 0 0;
+  --surface-container-high-rgb: 16 16 16;
+  --outline-variant-rgb: 38 38 38;
+  --outline-hover-rgb: 55 55 55;
+  --on-surface-rgb: 248 250 252;
+  --on-surface-variant-rgb: 148 163 184;
+  --text-muted-rgb: 100 116 139;
+  --vignette-start: rgba(0, 0, 0, 0.45);
+  --vignette-end: rgba(0, 0, 0, 0.95);
+}
+
+html:not(.dark) {
+  color-scheme: light;
+  --primary-rgb: 37 99 235;
+  --primary: #2563EB;
+  --background-rgb: 255 255 255;
+  --surface-rgb: 255 255 255;
+  --surface-container-rgb: 244 244 245;
+  --surface-container-low-rgb: 255 255 255;
+  --surface-container-high-rgb: 228 228 231;
+  --outline-variant-rgb: 228 228 231;
+  --outline-hover-rgb: 212 212 216;
+  --on-surface-rgb: 15 23 42;
+  --on-surface-variant-rgb: 71 85 105;
+  --text-muted-rgb: 100 116 139;
+  --vignette-start: rgba(255, 255, 255, 0.55);
+  --vignette-end: rgba(255, 255, 255, 0.98);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark,
+html.dark body,
+html.dark main,
+html.dark #__next {
+  background-color: #000000 !important;
+}
+
+html.dark .bg-background {
+  background-color: #000000 !important;
+}
+
+html.dark .bg-surface-container-low {
+  background-color: #000000 !important;
+}
+
+html:not(.dark),
+html:not(.dark) body,
+html:not(.dark) main,
+html:not(.dark) #__next {
+  background-color: #FFFFFF !important;
+}
+
+html:not(.dark) .bg-background {
+  background-color: #FFFFFF !important;
+}
+
+html:not(.dark) .bg-surface-container-low {
+  background-color: #FFFFFF !important;
+}
+
+body {
+  background-color: rgb(var(--background-rgb)) !important;
+  color: rgb(var(--on-surface-rgb));
+  min-height: 100vh;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #000000 !important;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #FFFFFF !important;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #D4D4D8;
+  border-radius: 9999px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #A1A1AA;
+}
+
+/* Text Selection */
+::selection {
+  background-color: rgba(59, 130, 246, 0.25);
+  color: var(--primary);
+}
+
+/* Subtle dot-grid pattern helper */
+html.dark .bg-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+html:not(.dark) .bg-dot-grid {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.bg-dot-grid-dense {
+  background-image: radial-gradient(var(--primary) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
