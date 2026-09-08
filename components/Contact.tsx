@@ -3,37 +3,21 @@
 import { useState } from "react";
 import Image from "next/image";
 import {
-  Check,
-  Copy,
   FileText,
   Github,
   Linkedin,
   Mail,
   Send,
 } from "lucide-react";
-import confetti from "canvas-confetti";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const handleCopyEmail = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-
-    try {
-      confetti({
-        particleCount: 30,
-        spread: 45,
-        origin: { y: 0.85 },
-        colors: ["#FFFFFF", "#D4D4D8", "#A1A1AA"],
-      });
-    } catch {}
-
-    setTimeout(() => setCopied(false), 2200);
-  };
+  // Direct Gmail Compose URL
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    PERSONAL_INFO.email
+  )}`;
 
   return (
     <section className="py-12 md:py-20 border-b border-outline-variant/30 relative" id="contact">
@@ -69,9 +53,9 @@ export default function Contact() {
           }}
         />
 
-        {/* Center: Cosmic Core (Avatar) */}
+        {/* Center: Cosmic Core (Avatar) - High Contrast for both Light & Dark */}
         <div className="relative z-20 flex items-center justify-center group/center">
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-surface border-2 border-outline-variant/70 shadow-[0_0_24px_rgba(255,255,255,0.08)] flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover/center:scale-105">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full p-1 bg-white dark:bg-surface border-2 border-neutral-400 dark:border-neutral-700 shadow-md dark:shadow-[0_0_24px_rgba(255,255,255,0.08)] flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover/center:scale-105">
             {!imageError ? (
               <Image
                 src="/images/avatar.jpg"
@@ -84,26 +68,23 @@ export default function Contact() {
                 unoptimized
               />
             ) : (
-              <div className="w-full h-full rounded-full bg-surface-container flex flex-col items-center justify-center">
-                <span className="font-mono font-bold text-lg text-on-surface">KM</span>
+              <div className="w-full h-full rounded-full bg-neutral-100 dark:bg-surface-container flex flex-col items-center justify-center">
+                <span className="font-mono font-bold text-lg text-neutral-900 dark:text-white">KM</span>
               </div>
             )}
           </div>
 
           {/* Central Orbit Pulse Halo */}
-          <div className="absolute -inset-2 rounded-full border border-outline-variant/30 animate-ping pointer-events-none opacity-20" />
+          <div className="absolute -inset-2 rounded-full border border-neutral-400 dark:border-neutral-700 animate-ping pointer-events-none opacity-20" />
 
           {/* Center Tooltip on Hover */}
-          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/center:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap px-2.5 py-0.5 rounded-full bg-surface-container border border-outline-variant/60 font-mono text-[10px] text-on-surface shadow-lg z-30">
+          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/center:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap px-2.5 py-0.5 rounded-full bg-white dark:bg-surface-container border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] text-neutral-900 dark:text-on-surface shadow-lg z-30">
             Koustav Mondal
           </div>
         </div>
 
-        {/* ================= Orbit 2: Inner Planetary Ring ================= */}
-        <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[310px] md:h-[310px] rounded-full border border-dashed border-outline-variant/40 animate-orbit-medium pause-on-hover pointer-events-none z-10">
-          {/* Inner Ring subtle accent */}
-          <div className="absolute inset-0 rounded-full border border-outline-variant/20" />
-
+        {/* ================= Orbit 2: Inner Planetary Ring (High-Contrast in Light & Dark Mode) ================= */}
+        <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[310px] md:h-[310px] rounded-full border border-dashed border-neutral-400/80 dark:border-neutral-700/60 animate-orbit-medium pause-on-hover pointer-events-none z-10">
           {/* Node 2A: LinkedIn */}
           <div
             className="absolute top-[8%] left-[76%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
@@ -115,10 +96,10 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn Profile"
-                className="group/icon relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface-variant hover:text-white transition-all duration-200 hover:scale-115 shadow-[0_4px_16px_rgba(0,0,0,0.5)] cursor-pointer"
+                className="group/icon relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white dark:bg-surface border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all duration-200 hover:scale-115 shadow-md dark:shadow-[0_4px_16px_rgba(0,0,0,0.5)] cursor-pointer"
               >
                 <Linkedin className="w-5 h-5 transition-transform group-hover/icon:scale-110" />
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-surface text-on-surface border border-outline-variant/60 font-mono text-[10px] shadow-lg">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-white dark:bg-surface text-neutral-900 dark:text-on-surface border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] shadow-lg">
                   LinkedIn
                 </span>
               </a>
@@ -136,10 +117,10 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View Resume"
-                className="group/icon relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface-variant hover:text-white transition-all duration-200 hover:scale-115 shadow-[0_4px_16px_rgba(0,0,0,0.5)] cursor-pointer"
+                className="group/icon relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white dark:bg-surface border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all duration-200 hover:scale-115 shadow-md dark:shadow-[0_4px_16px_rgba(0,0,0,0.5)] cursor-pointer"
               >
                 <FileText className="w-5 h-5 transition-transform group-hover/icon:scale-110" />
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-surface text-on-surface border border-outline-variant/60 font-mono text-[10px] shadow-lg">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-white dark:bg-surface text-neutral-900 dark:text-on-surface border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] shadow-lg">
                   Resume
                 </span>
               </a>
@@ -147,11 +128,8 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ================= Orbit 1: Outer Planetary Ring ================= */}
-        <div className="absolute w-[330px] h-[330px] sm:w-[410px] sm:h-[410px] md:w-[470px] md:h-[470px] rounded-full border border-dashed border-outline-variant/30 animate-orbit-slow pause-on-hover pointer-events-none z-10">
-          {/* Outer Ring subtle accent */}
-          <div className="absolute inset-0 rounded-full border border-outline-variant/15" />
-
+        {/* ================= Orbit 1: Outer Planetary Ring (High-Contrast in Light & Dark Mode) ================= */}
+        <div className="absolute w-[330px] h-[330px] sm:w-[410px] sm:h-[410px] md:w-[470px] md:h-[470px] rounded-full border border-dashed border-neutral-400/80 dark:border-neutral-700/60 animate-orbit-slow pause-on-hover pointer-events-none z-10">
           {/* Node 1A: GitHub */}
           <div
             className="absolute top-[9%] left-[24%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
@@ -163,10 +141,10 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub Profile"
-                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface-variant hover:text-white transition-all duration-200 hover:scale-115 shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
+                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-surface border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all duration-200 hover:scale-115 shadow-md dark:shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
               >
                 <Github className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover/icon:scale-110" />
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-surface text-on-surface border border-outline-variant/60 font-mono text-[10px] shadow-lg">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-white dark:bg-surface text-neutral-900 dark:text-on-surface border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] shadow-lg">
                   GitHub
                 </span>
               </a>
@@ -184,79 +162,63 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X (Twitter) Profile"
-                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface-variant hover:text-white transition-all duration-200 hover:scale-115 shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
+                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-surface border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all duration-200 hover:scale-115 shadow-md dark:shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5 fill-current transition-transform group-hover/icon:scale-110" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-surface text-on-surface border border-outline-variant/60 font-mono text-[10px] shadow-lg">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-white dark:bg-surface text-neutral-900 dark:text-on-surface border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] shadow-lg">
                   Twitter / X
                 </span>
               </a>
             </div>
           </div>
 
-          {/* Node 1C: Direct Email (Click to Copy) */}
+          {/* Node 1C: Direct Gmail Compose in Circle */}
           <div
             className="absolute top-[70%] left-[8%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
-            title="Email (Click to Copy)"
+            title="Compose Email in Gmail"
           >
             <div className="animate-counter-rotate-slow">
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                aria-label="Copy Email Address"
-                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface-variant hover:text-white transition-all duration-200 hover:scale-115 shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
+              <a
+                href={gmailComposeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Compose Email in Gmail"
+                className="group/icon relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-surface border-2 border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white text-neutral-800 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all duration-200 hover:scale-115 shadow-md dark:shadow-[0_6px_20px_rgba(0,0,0,0.5)] cursor-pointer"
               >
-                {copied ? (
-                  <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                ) : (
-                  <Mail className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover/icon:scale-110" />
-                )}
+                <Mail className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover/icon:scale-110" />
 
-                {/* Interactive Tooltip / Copied Badge */}
-                <span
-                  className={`absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap px-2 py-0.5 rounded font-mono text-[10px] shadow-lg transition-all duration-200 pointer-events-none ${
-                    copied
-                      ? "opacity-100 scale-100 bg-white text-black font-semibold"
-                      : "opacity-0 group-hover/icon:opacity-100 bg-surface text-on-surface border border-outline-variant/60"
-                  }`}
-                >
-                  {copied ? "Copied!" : "Copy Email"}
+                {/* Interactive Tooltip */}
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap px-2 py-0.5 rounded bg-white dark:bg-surface text-neutral-900 dark:text-on-surface border border-neutral-300 dark:border-outline-variant/60 font-mono text-[10px] shadow-lg">
+                  Gmail Compose
                 </span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Accessible Quick-Reach Bar below the Cosmic Galaxy */}
-      <div className="mt-6 max-w-xl mx-auto p-4 sm:p-5 rounded-2xl bg-surface-container-low border border-outline-variant/50 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-xl">
+      {/* Accessible Direct Reach Bar below the Cosmic Galaxy (No Copy Email button as requested) */}
+      <div className="mt-6 max-w-xl mx-auto p-4 sm:p-5 rounded-2xl bg-neutral-100 dark:bg-surface-container-low border border-neutral-300 dark:border-outline-variant/50 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-md dark:shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-surface-container border border-outline-variant/60 flex items-center justify-center text-on-surface shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-white dark:bg-surface-container border border-neutral-300 dark:border-outline-variant/60 flex items-center justify-center text-neutral-900 dark:text-on-surface shrink-0 shadow-sm">
             <Mail className="w-4 h-4" />
           </div>
           <div className="flex flex-col text-left">
             <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
-            <span className="font-mono text-xs sm:text-sm text-on-surface font-medium select-all">
+            <span className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium select-all">
               {PERSONAL_INFO.email}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={handleCopyEmail}
-            className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-surface border border-outline-variant/60 hover:border-outline-hover text-on-surface hover:text-white font-mono text-xs transition-colors flex items-center justify-center gap-1.5"
-          >
-            {copied ? <Check className="w-3.5 h-3.5 text-white" /> : <Copy className="w-3.5 h-3.5" />}
-            <span>{copied ? "Copied" : "Copy"}</span>
-          </button>
-
           <a
-            href={PERSONAL_INFO.socials.email}
-            className="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-on-surface text-background font-mono text-xs font-semibold hover:bg-on-surface/90 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm"
           >
             <span>Say Hello</span>
             <Send className="w-3 h-3" />

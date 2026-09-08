@@ -79,12 +79,12 @@ export default function CustomCursor() {
     <div
       ref={cursorRef}
       aria-hidden="true"
-      className={`fixed top-0 left-0 pointer-events-none z-[99999] rounded-full mix-blend-difference bg-white transition-[width,height,opacity,box-shadow] duration-300 ease-out will-change-transform ${
+      className={`fixed top-0 left-0 pointer-events-none z-[99999] rounded-full mix-blend-difference bg-white transition-[width,height,opacity,box-shadow] duration-200 ease-out will-change-transform ${
         isVisible ? "opacity-100" : "opacity-0"
       } ${
         isHovered
-          ? "w-12 h-12 -ml-6 -mt-6 shadow-[0_0_24px_rgba(255,255,255,0.45)]"
-          : "w-4 h-4 -ml-2 -mt-2"
+          ? "w-7 h-7 -ml-3.5 -mt-3.5 shadow-[0_0_16px_rgba(255,255,255,0.35)]"
+          : "w-2.5 h-2.5 -ml-[5px] -mt-[5px]"
       }`}
       style={{
         transform: `translate3d(-100px, -100px, 0)`,
