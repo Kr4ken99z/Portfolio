@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowUpRight, ChevronDown, Github } from "lucide-react";
 import { PROJECTS, Project } from "@/data/portfolioData";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -11,23 +12,30 @@ export default function Projects() {
   return (
     <section className="py-12 md:py-18 border-b border-black/15 dark:border-outline-variant/30" id="projects">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
-          <span>FEATURED PROJECTS</span>
-        </h2>
-        <span className="font-mono text-xs text-text-muted">
-          0{PROJECTS.length} Selected
-        </span>
-      </div>
+      <ScrollReveal>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
+            <span>FEATURED PROJECTS</span>
+          </h2>
+          <span className="font-mono text-xs text-text-muted">
+            0{PROJECTS.length} Selected
+          </span>
+        </div>
+      </ScrollReveal>
 
       {/* 2-Column Clean Minimal Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {visibleProjects.map((project: Project, index) => (
-          <div
+          <ScrollReveal
             key={project.id}
-            className="group bg-surface-container-low border border-black/15 dark:border-outline-variant/40 hover:border-black/35 dark:hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-all duration-150 flex flex-col justify-between shadow-[0_2px_8px_rgba(0,0,0,0.03)] dark:shadow-none"
+            delay={index * 0.08}
+            duration={0.45}
+            className="h-full"
           >
+            <div
+              className="group bg-surface-container-low border border-black/15 dark:border-outline-variant/40 hover:border-black/35 dark:hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-all duration-150 flex flex-col justify-between shadow-[0_2px_8px_rgba(0,0,0,0.03)] dark:shadow-none h-full"
+            >
             <div className="flex flex-col gap-2">
               {/* Top Row: Category + Direct Action Links */}
               <div className="flex items-center justify-between">
@@ -97,12 +105,13 @@ export default function Projects() {
               ))}
             </div>
           </div>
+        </ScrollReveal>
         ))}
       </div>
 
       {/* Show more projects toggle */}
       {PROJECTS.length > 4 && (
-        <div className="mt-6 flex justify-center">
+        <ScrollReveal delay={0.1} className="mt-6 flex justify-center">
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
@@ -115,11 +124,11 @@ export default function Projects() {
               }`}
             />
           </button>
-        </div>
+        </ScrollReveal>
       )}
 
       {/* Minimalist Underlined Link (exactly matching user's screenshot) */}
-      <div className="mt-8 pt-2">
+      <ScrollReveal delay={0.15} className="mt-8 pt-2">
         <a
           href="https://github.com/Kr4ken99z?tab=repositories"
           target="_blank"
@@ -129,7 +138,7 @@ export default function Projects() {
           <span>Show all projects</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

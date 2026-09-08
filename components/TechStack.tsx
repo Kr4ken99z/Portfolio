@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import TechIcon from "@/components/TechIcons";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface TechItem {
   name: string;
@@ -40,16 +42,41 @@ export default function TechStack() {
   return (
     <section className="py-12 md:py-16 border-b border-black/15 dark:border-outline-variant/30" id="stack">
       {/* Title Header */}
-      <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold mb-6 flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
-        <span>TECH STACK</span>
-      </h2>
+      <ScrollReveal>
+        <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold mb-6 flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
+          <span>TECH STACK</span>
+        </h2>
+      </ScrollReveal>
 
-      {/* Clean Continuous Flex Wrap with individual icon tiles */}
-      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5">
+      {/* Clean Continuous Flex Wrap with cascading micro-stagger */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.02,
+            },
+          },
+        }}
+        className="flex flex-wrap items-center gap-2.5 sm:gap-3.5"
+      >
         {ALL_TECH.map((item) => (
-          <div
+          <motion.div
             key={item.name}
+            variants={{
+              hidden: { opacity: 0, y: 10, scale: 0.95 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: { duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] as const },
+              },
+            }}
             onMouseEnter={() => setHoveredTech(item.name)}
             onMouseLeave={() => setHoveredTech(null)}
             className="relative flex items-center justify-center p-2 rounded-xl bg-white dark:bg-surface border border-black/10 dark:border-neutral-800 hover:border-black/30 dark:hover:border-neutral-600 transition-all duration-150 hover:scale-110 hover:-translate-y-0.5 cursor-pointer group shadow-sm"
@@ -63,9 +90,9 @@ export default function TechStack() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white"></div>
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

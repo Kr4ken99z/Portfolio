@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import ThemeToggle from "@/components/ThemeToggle";
 import HyperText from "@/components/HyperText";
@@ -18,7 +19,12 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-outline-variant/40 transition-colors">
+    <motion.header
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] as const }}
+      className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-black/10 dark:border-outline-variant/40 transition-colors"
+    >
       <div className="flex justify-between items-center max-w-3xl mx-auto px-5 sm:px-6 h-16">
         {/* Left: Brand Monogram & Live Status */}
         <div className="flex items-center gap-4">
@@ -95,6 +101,6 @@ export default function Navbar() {
           ))}
         </div>
       )}
-    </header>
+    </motion.header>
   );
 }

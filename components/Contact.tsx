@@ -10,6 +10,7 @@ import {
   Send,
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Contact() {
   const [imageError, setImageError] = useState(false);
@@ -22,28 +23,31 @@ export default function Contact() {
   return (
     <section className="py-12 md:py-20 border-b border-outline-variant/30 relative" id="contact">
       {/* Top Monospace Tag */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
-        <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold">
-          GET IN TOUCH
-        </h2>
-      </div>
+      <ScrollReveal>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
+          <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold">
+            GET IN TOUCH
+          </h2>
+        </div>
 
-      {/* Main Headline (Clean Monochrome Anjishnu Style) */}
-      <div className="text-left md:text-center mb-8 sm:mb-12">
-        <h3 className="font-mono text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-on-surface leading-tight">
-          <span>Contact </span>
-          <span className="text-on-surface font-extrabold tracking-tight">
-            me
-          </span>
-        </h3>
-        <p className="font-mono text-xs sm:text-sm text-on-surface-variant max-w-lg mx-auto mt-2.5 leading-relaxed">
-          Have an opportunity, an idea, or just want to connect? Explore my cosmic orbit or reach out directly below.
-        </p>
-      </div>
+        {/* Main Headline (Clean Monochrome Anjishnu Style) */}
+        <div className="text-left md:text-center mb-8 sm:mb-12">
+          <h3 className="font-mono text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-on-surface leading-tight">
+            <span>Contact </span>
+            <span className="text-on-surface font-extrabold tracking-tight">
+              me
+            </span>
+          </h3>
+          <p className="font-mono text-xs sm:text-sm text-on-surface-variant max-w-lg mx-auto mt-2.5 leading-relaxed">
+            Have an opportunity, an idea, or just want to connect? Explore my cosmic orbit or reach out directly below.
+          </p>
+        </div>
+      </ScrollReveal>
 
       {/* Cosmic Galaxy / Planetary Orbits (Inspired by Anjishnu Ganguly) */}
-      <div className="relative w-full max-w-xl mx-auto h-[380px] sm:h-[460px] md:h-[500px] flex items-center justify-center overflow-hidden select-none">
+      <ScrollReveal delay={0.1}>
+        <div className="relative w-full max-w-xl mx-auto h-[380px] sm:h-[460px] md:h-[500px] flex items-center justify-center overflow-hidden select-none">
         {/* Ambient Cosmic Radial Glow */}
         <div
           className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-60"
@@ -198,33 +202,36 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* Accessible Direct Reach Bar below the Cosmic Galaxy (No Copy Email button as requested) */}
-      <div className="mt-6 max-w-xl mx-auto p-4 sm:p-5 rounded-2xl bg-neutral-100 dark:bg-surface-container-low border border-neutral-300 dark:border-outline-variant/50 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-md dark:shadow-xl">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-white dark:bg-surface-container border border-neutral-300 dark:border-outline-variant/60 flex items-center justify-center text-neutral-900 dark:text-on-surface shrink-0 shadow-sm">
-            <Mail className="w-4 h-4" />
+      <ScrollReveal delay={0.15}>
+        <div className="mt-6 max-w-xl mx-auto p-4 sm:p-5 rounded-2xl bg-neutral-100 dark:bg-surface-container-low border border-neutral-300 dark:border-outline-variant/50 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-md dark:shadow-xl">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-white dark:bg-surface-container border border-neutral-300 dark:border-outline-variant/60 flex items-center justify-center text-neutral-900 dark:text-on-surface shrink-0 shadow-sm">
+              <Mail className="w-4 h-4" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
+              <span className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium select-all">
+                {PERSONAL_INFO.email}
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col text-left">
-            <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
-            <span className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium select-all">
-              {PERSONAL_INFO.email}
-            </span>
-          </div>
-        </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <a
-            href={gmailComposeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm"
-          >
-            <span>Send Mail</span>
-            <Send className="w-3 h-3" />
-          </a>
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <a
+              href={gmailComposeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm"
+            >
+              <span>Send Mail</span>
+              <Send className="w-3 h-3" />
+            </a>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

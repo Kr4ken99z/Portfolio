@@ -3,8 +3,32 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import HyperText from "@/components/HyperText";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.21, 0.47, 0.32, 0.98] as const,
+    },
+  },
+};
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -34,27 +58,41 @@ export default function Hero() {
   return (
     <section className="py-10 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-b border-black/15 dark:border-outline-variant/30">
       {/* Left Column: Core Introduction */}
-      <div className="md:col-span-7 flex flex-col gap-5">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="md:col-span-7 flex flex-col gap-5"
+      >
         {/* Monospace Pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-black/15 dark:border-outline-variant/60 w-fit">
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-black/15 dark:border-outline-variant/60 w-fit"
+        >
           <span className="w-1.5 h-1.5 rounded-full bg-text-muted"></span>
           <span className="font-mono text-[11px] text-on-surface-variant font-medium tracking-wide uppercase">
             {PERSONAL_INFO.tagline}
           </span>
-        </div>
+        </motion.div>
 
         {/* Main Headline (JetBrains Mono style from Mehbub) */}
-        <h1 className="font-mono text-xl sm:text-2xl md:text-[1.75rem] font-semibold tracking-tight text-on-surface leading-snug">
+        <motion.h1
+          variants={itemVariants}
+          className="font-mono text-xl sm:text-2xl md:text-[1.75rem] font-semibold tracking-tight text-on-surface leading-snug"
+        >
           Building reliable web applications, robust REST APIs, and intuitive digital tools.
-        </h1>
+        </motion.h1>
 
         {/* Bio Paragraph (JetBrains Mono style from Mehbub screenshot) */}
-        <p className="font-mono text-xs sm:text-[13px] text-on-surface-variant leading-relaxed sm:leading-[1.85]">
+        <motion.p
+          variants={itemVariants}
+          className="font-mono text-xs sm:text-[13px] text-on-surface-variant leading-relaxed sm:leading-[1.85]"
+        >
           {PERSONAL_INFO.bio}
-        </p>
+        </motion.p>
 
         {/* Action & Social Strip */}
-        <div className="pt-2 flex flex-wrap items-center gap-3">
+        <motion.div variants={itemVariants} className="pt-2 flex flex-wrap items-center gap-3">
           <a
             href="#contact"
             className="px-4 py-2 rounded-xl bg-on-surface text-background font-medium text-xs hover:opacity-90 transition-all active:scale-[0.98] flex items-center gap-1.5 shadow-sm font-mono"
@@ -121,11 +159,16 @@ export default function Hero() {
               <Mail className="w-4 h-4" />
             </a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Right Column: Clickable Profile Card -> GitHub */}
-      <div className="md:col-span-5">
+      <motion.div
+        initial={{ opacity: 0, y: 16, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+        className="md:col-span-5"
+      >
         <a
           href={PERSONAL_INFO.socials.github}
           target="_blank"
@@ -195,7 +238,7 @@ export default function Hero() {
             </div>
           </div>
         </a>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface QuoteItem {
   quote: string;
@@ -41,8 +42,9 @@ export default function QuoteCard() {
   const currentQuote = QUOTES[index];
 
   return (
-    <div className="py-10 border-b border-outline-variant/30 flex items-center justify-center">
-      <div className="w-full p-5 sm:p-6 rounded-2xl bg-surface-container-low border border-outline-variant/40 hover:border-outline-variant transition-colors shadow-sm relative group">
+    <div className="py-10 border-b border-black/15 dark:border-outline-variant/30 flex items-center justify-center">
+      <ScrollReveal delay={0.1} className="w-full">
+        <div className="w-full p-5 sm:p-6 rounded-2xl bg-surface-container-low border border-black/15 dark:border-outline-variant/40 hover:border-black/35 dark:hover:border-outline-variant transition-all duration-150 shadow-[0_2px_8px_rgba(0,0,0,0.03)] dark:shadow-none relative group">
         <div className="flex items-start gap-3 min-w-0">
           <span className="font-mono text-text-muted text-base select-none mt-0.5 shrink-0">
             “
@@ -66,6 +68,7 @@ export default function QuoteCard() {
           </div>
         </div>
       </div>
+      </ScrollReveal>
     </div>
   );
 }

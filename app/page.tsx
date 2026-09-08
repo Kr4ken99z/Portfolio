@@ -7,10 +7,14 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
 import QuoteCard from "@/components/QuoteCard";
+import ScrollProgress from "@/components/ScrollProgress";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background text-on-surface antialiased relative">
+      {/* Subtle Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Sticky Glass Navbar */}
       <Navbar />
 
