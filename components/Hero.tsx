@@ -32,11 +32,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="py-10 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-b border-outline-variant/30">
+    <section className="py-10 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-b border-black/15 dark:border-outline-variant/30">
       {/* Left Column: Core Introduction */}
       <div className="md:col-span-7 flex flex-col gap-5">
         {/* Monospace Pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 w-fit">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-black/15 dark:border-outline-variant/60 w-fit">
           <span className="w-1.5 h-1.5 rounded-full bg-text-muted"></span>
           <span className="font-mono text-[11px] text-on-surface-variant font-medium tracking-wide uppercase">
             {PERSONAL_INFO.tagline}
@@ -64,7 +64,7 @@ export default function Hero() {
 
           <a
             href="#projects"
-            className="px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant/50 text-on-surface font-mono text-xs hover:border-outline-variant hover:text-white transition-all active:scale-[0.98] flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl bg-surface-container-low border border-black/15 dark:border-outline-variant/50 text-on-surface font-mono text-xs hover:border-black/35 dark:hover:border-outline-variant transition-all active:scale-[0.98] flex items-center gap-1.5 shadow-sm"
           >
             <span>Explore Work</span>
             <ArrowDown className="w-3.5 h-3.5" />
@@ -74,7 +74,7 @@ export default function Hero() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-2 rounded-xl bg-surface-container-low border border-outline-variant/50 text-on-surface font-mono text-xs hover:border-outline-variant hover:text-white transition-all active:scale-[0.98] flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl bg-surface-container-low border border-black/15 dark:border-outline-variant/50 text-on-surface font-mono text-xs hover:border-black/35 dark:hover:border-outline-variant transition-all active:scale-[0.98] flex items-center gap-1.5 shadow-sm"
           >
             <span>Resume</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -86,7 +86,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline-variant transition-all active:scale-95"
+              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -96,7 +96,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline-variant transition-all active:scale-95"
+              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm"
             >
               <Linkedin className="w-4 h-4" />
             </a>
@@ -106,7 +106,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X (Twitter) Profile"
-              className="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline-variant transition-all active:scale-95"
+              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -116,7 +116,7 @@ export default function Hero() {
             <a
               href={PERSONAL_INFO.socials.email}
               aria-label="Send Email"
-              className="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-outline-variant transition-all active:scale-95"
+              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm"
             >
               <Mail className="w-4 h-4" />
             </a>
@@ -133,11 +133,11 @@ export default function Hero() {
           title="View GitHub (@Kr4ken99z)"
           onMouseEnter={() => setIsCardHovered(true)}
           onMouseLeave={() => setIsCardHovered(false)}
-          className="bg-surface-container-low border border-outline-variant/50 hover:border-outline-variant rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 shadow-2xl relative overflow-hidden group transition-all duration-200 hover:-translate-y-0.5 cursor-pointer block"
+          className="bg-surface-container-low border border-black/15 dark:border-outline-variant/50 hover:border-black/35 dark:hover:border-outline-variant rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 shadow-2xl relative overflow-hidden group transition-all duration-200 hover:-translate-y-0.5 cursor-pointer block"
         >
           {/* Avatar & Name Row */}
           <div className="flex items-center gap-3">
-            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-xl bg-surface-container border border-outline-variant/70 flex items-center justify-center overflow-hidden relative shrink-0 shadow-inner">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-xl bg-surface-container border border-black/15 dark:border-outline-variant/70 flex items-center justify-center overflow-hidden relative shrink-0 shadow-inner">
               {!imageError ? (
                 <Image
                   src="/images/avatar.jpg"

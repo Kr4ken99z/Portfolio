@@ -9,7 +9,7 @@ export default function Projects() {
   const visibleProjects = showAll ? PROJECTS : PROJECTS.slice(0, 4);
 
   return (
-    <section className="py-12 md:py-18 border-b border-outline-variant/30" id="projects">
+    <section className="py-12 md:py-18 border-b border-black/15 dark:border-outline-variant/30" id="projects">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
@@ -26,7 +26,7 @@ export default function Projects() {
         {visibleProjects.map((project: Project, index) => (
           <div
             key={project.id}
-            className="group bg-surface-container-low border border-outline-variant/40 hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-colors duration-150 flex flex-col justify-between"
+            className="group bg-surface-container-low border border-black/15 dark:border-outline-variant/40 hover:border-black/35 dark:hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-all duration-150 flex flex-col justify-between shadow-[0_2px_8px_rgba(0,0,0,0.03)] dark:shadow-none"
           >
             <div className="flex flex-col gap-2">
               {/* Top Row: Category + Direct Action Links */}
@@ -63,11 +63,11 @@ export default function Projects() {
                   )}
 
                   {project.statusBadge ? (
-                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/40">
+                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-black/15 dark:border-outline-variant/40">
                       {project.statusBadge}
                     </span>
                   ) : !project.liveUrl && !project.githubUrl ? (
-                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/40">
+                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-black/15 dark:border-outline-variant/40">
                       Offline
                     </span>
                   ) : null}
@@ -86,7 +86,7 @@ export default function Projects() {
             </div>
 
             {/* Bottom Tech Tags */}
-            <div className="pt-3 mt-3 border-t border-outline-variant/30 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-text-muted">
+            <div className="pt-3 mt-3 border-t border-black/10 dark:border-outline-variant/30 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-text-muted">
               {project.tags.map((tag, idx) => (
                 <span key={tag} className="flex items-center gap-1.5">
                   <span className="text-on-surface-variant">{tag}</span>
@@ -106,7 +106,7 @@ export default function Projects() {
           <button
             type="button"
             onClick={() => setShowAll(!showAll)}
-            className="px-4 py-2 rounded-lg bg-surface-container-low border border-outline-variant/60 hover:border-outline-variant text-on-surface font-mono text-xs hover:text-white transition-all flex items-center gap-2 active:scale-95 group shadow-sm"
+            className="px-4 py-2 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/60 hover:border-black/35 dark:hover:border-outline-variant text-on-surface font-mono text-xs hover:text-white transition-all flex items-center gap-2 active:scale-95 group shadow-sm"
           >
             <span>{showAll ? "Show less projects" : "Show more projects"}</span>
             <ChevronDown
