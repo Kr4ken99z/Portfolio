@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import ThemeToggle from "@/components/ThemeToggle";
+import HyperText from "@/components/HyperText";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,16 +24,21 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="font-mono text-sm sm:text-base font-medium tracking-tight text-on-surface hover:text-primary transition-colors flex items-center gap-1.5"
+            className="font-mono text-sm sm:text-base font-semibold tracking-tight text-on-surface hover:text-primary transition-colors flex items-center gap-0.5 group"
           >
-            <span>@devkoustav</span>
+            <span className="text-text-muted select-none">~/</span>
+            <HyperText
+              text="devkoustav"
+              duration={700}
+              className="font-semibold text-on-surface group-hover:text-primary transition-colors"
+            />
           </Link>
           <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/40">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            <span className="font-mono text-[11px] text-on-surface uppercase tracking-wider">
+            <span className="font-mono text-[11px] text-primary font-medium uppercase tracking-wider">
               {PERSONAL_INFO.status}
             </span>
           </div>
@@ -74,7 +80,7 @@ export default function Navbar() {
         <div className="md:hidden px-5 py-4 border-b border-outline-variant/40 bg-background/95 backdrop-blur-lg flex flex-col gap-3">
           <div className="sm:hidden flex items-center gap-2 px-3 py-1.5 mb-1 rounded-full bg-surface-container-low border border-outline-variant/40 w-fit">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span className="font-mono text-[10px] text-on-surface uppercase tracking-wider">
+            <span className="font-mono text-[10px] text-primary font-medium uppercase tracking-wider">
               {PERSONAL_INFO.status}
             </span>
           </div>

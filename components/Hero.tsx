@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import HyperText from "@/components/HyperText";
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [localTime, setLocalTime] = useState<string>("");
   const [imageError, setImageError] = useState(false);
+  const [isCardHovered, setIsCardHovered] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -129,6 +131,8 @@ export default function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           title="View GitHub (@Kr4ken99z)"
+          onMouseEnter={() => setIsCardHovered(true)}
+          onMouseLeave={() => setIsCardHovered(false)}
           className="bg-surface-container-low border border-outline-variant/50 hover:border-primary/60 rounded-2xl p-4 sm:p-5 flex flex-col gap-3.5 shadow-2xl relative overflow-hidden group transition-all duration-200 hover:-translate-y-0.5 cursor-pointer block"
         >
           {/* Avatar & Name Row */}
@@ -156,8 +160,13 @@ export default function Hero() {
             </div>
 
             <div>
-              <h2 className="text-base sm:text-lg font-semibold tracking-normal text-on-surface group-hover:text-primary transition-colors">
-                Koustav
+              <h2 className="text-base sm:text-lg font-semibold tracking-normal text-on-surface group-hover:text-primary transition-colors flex items-center">
+                <HyperText
+                  text="Koustav"
+                  trigger={isCardHovered}
+                  duration={600}
+                  className="font-semibold text-on-surface group-hover:text-primary transition-colors"
+                />
               </h2>
               <p className="font-mono text-xs text-primary mt-0.5">{PERSONAL_INFO.role}</p>
             </div>

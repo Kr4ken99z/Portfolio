@@ -20,8 +20,8 @@ const config: Config = {
         "outline-hover": "rgb(var(--outline-hover-rgb) / <alpha-value>)",
         primary: {
           DEFAULT: "rgb(var(--primary-rgb) / <alpha-value>)",
-          tint: "#60A5FA",
-          dark: "#1D4ED8",
+          tint: "#4EDEA3",
+          dark: "#003824",
         },
         "on-surface": "rgb(var(--on-surface-rgb) / <alpha-value>)",
         "on-surface-variant": "rgb(var(--on-surface-variant-rgb) / <alpha-value>)",

@@ -136,7 +136,7 @@ export default function TechIcon({ name, className = "w-5 h-5" }: IconProps) {
       );
     case "api":
       return (
-        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+        <svg className={className} viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
           <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16M4 20h.01" />
         </svg>
       );

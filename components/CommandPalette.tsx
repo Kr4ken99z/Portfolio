@@ -80,7 +80,7 @@ export default function CommandPalette() {
           particleCount: 30,
           spread: 45,
           origin: { y: 0.8 },
-          colors: ["#3B82F6", "#60A5FA", "#FFFFFF"],
+          colors: ["#10B981", "#4EDEA3", "#FFFFFF"],
         });
       } catch {}
       setTimeout(() => setCopied(false), 2000);

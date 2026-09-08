@@ -4,8 +4,8 @@
 
 :root, html.dark {
   color-scheme: dark;
-  --primary-rgb: 59 130 246;
-  --primary: #3B82F6;
+  --primary-rgb: 16 185 129;
+  --primary: #10B981;
   --background-rgb: 0 0 0;
   --surface-rgb: 0 0 0;
   --surface-container-rgb: 10 10 10;
@@ -22,8 +22,8 @@
 
 html:not(.dark) {
   color-scheme: light;
-  --primary-rgb: 37 99 235;
-  --primary: #2563EB;
+  --primary-rgb: 5 150 105;
+  --primary: #059669;
   --background-rgb: 255 255 255;
   --surface-rgb: 255 255 255;
   --surface-container-rgb: 244 244 245;
@@ -113,7 +113,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
 
 /* Text Selection */
 ::selection {
-  background-color: rgba(59, 130, 246, 0.25);
+  background-color: rgba(16, 185, 129, 0.25);
   color: var(--primary);
 }
 
