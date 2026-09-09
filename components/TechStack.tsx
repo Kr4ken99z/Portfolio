@@ -43,10 +43,28 @@ export default function TechStack() {
     <section className="py-12 md:py-16 border-b border-black/15 dark:border-outline-variant/30" id="stack">
       {/* Title Header */}
       <ScrollReveal>
-        <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold mb-6 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
-          <span>TECH STACK</span>
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+            <span>TECH STACK</span>
+          </h2>
+          <button
+            type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                if ((window as any).openAbout) {
+                  (window as any).openAbout();
+                } else {
+                  window.dispatchEvent(new CustomEvent("open-about"));
+                }
+              }
+            }}
+            className="font-mono text-[11px] text-text-muted hover:text-primary transition-colors cursor-pointer flex items-center gap-1"
+          >
+            <span>About</span>
+            <span>↗</span>
+          </button>
+        </div>
       </ScrollReveal>
 
       {/* Clean Continuous Flex Wrap with cascading micro-stagger */}

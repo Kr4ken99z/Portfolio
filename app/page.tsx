@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import About from "@/components/About";
 import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
@@ -8,6 +9,7 @@ import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
 import QuoteCard from "@/components/QuoteCard";
 import ScrollProgress from "@/components/ScrollProgress";
+import UmaAssistant from "@/components/UmaAssistant";
 
 export default function Home() {
   return (
@@ -34,6 +36,13 @@ export default function Home() {
 
       {/* Interactive Command Palette & Floating Contact Pill */}
       <CommandPalette />
+
+      {/* Signature UMA Portfolio AI Assistant */}
+      <UmaAssistant />
+
+      {/* Interactive Hover About Modal Popover */}
+      <About />
     </div>
   );
 }
+

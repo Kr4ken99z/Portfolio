@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, ChevronDown, Github } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Github, Sparkles } from "lucide-react";
 import { PROJECTS, Project } from "@/data/portfolioData";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -15,7 +15,7 @@ export default function Projects() {
       <ScrollReveal>
         <div className="flex items-center justify-between mb-8">
           <h2 className="font-mono text-xs text-text-muted uppercase tracking-widest font-semibold flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-text-muted inline-block"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
             <span>FEATURED PROJECTS</span>
           </h2>
           <span className="font-mono text-xs text-text-muted">
@@ -36,76 +36,89 @@ export default function Projects() {
             <div
               className="group bg-surface-container-low border border-black/15 dark:border-outline-variant/40 hover:border-black/35 dark:hover:border-outline-variant rounded-xl p-4 sm:p-5 transition-all duration-150 flex flex-col justify-between shadow-[0_2px_8px_rgba(0,0,0,0.03)] dark:shadow-none h-full"
             >
-            <div className="flex flex-col gap-2">
-              {/* Top Row: Category + Direct Action Links */}
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] text-text-muted font-medium">
-                  0{index + 1} // {project.category}
-                </span>
+              <div className="flex flex-col gap-2.5">
+                {/* Top Row: Category + Direct Action Buttons */}
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-[11px] text-text-muted font-medium">
+                    0{index + 1} // {project.category}
+                  </span>
 
-                <div className="flex items-center gap-2">
-                  {project.liveUrl && project.liveUrl !== "#" && project.liveUrl !== "" && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Live Demo"
-                      aria-label={`Open ${project.title} live demo`}
-                      className="text-on-surface-variant hover:text-on-surface transition-colors p-0.5"
-                    >
-                      <ArrowUpRight className="w-4 h-4" />
-                    </a>
-                  )}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {project.liveUrl && project.liveUrl !== "#" && project.liveUrl !== "" && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`${project.title} Live Demo`}
+                        aria-label={`Open ${project.title} live demo`}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-black/10 dark:border-neutral-800 hover:border-black/30 dark:hover:border-neutral-600 text-on-surface font-mono text-[10px] sm:text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                      >
+                        <span>Demo</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
 
-                  {project.githubUrl && project.githubUrl !== "" && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="GitHub Repository"
-                      aria-label={`View ${project.title} source code`}
-                      className="text-on-surface-variant hover:text-on-surface transition-colors p-0.5"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+                    {project.githubUrl && project.githubUrl !== "" && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`${project.title} Source Code`}
+                        aria-label={`View ${project.title} source code`}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container border border-black/10 dark:border-neutral-800 hover:border-black/30 dark:hover:border-neutral-600 text-on-surface font-mono text-[10px] sm:text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                      >
+                        <Github className="w-3 h-3" />
+                        <span>Code</span>
+                      </a>
+                    )}
 
-                  {project.statusBadge ? (
-                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-black/15 dark:border-outline-variant/40">
-                      {project.statusBadge}
-                    </span>
-                  ) : !project.liveUrl && !project.githubUrl ? (
-                    <span className="font-mono text-[10px] text-text-muted px-1.5 py-0.5 rounded bg-surface-container border border-black/15 dark:border-outline-variant/40">
-                      Offline
-                    </span>
-                  ) : null}
+                    {project.statusBadge && (
+                      <span className="font-mono text-[10px] text-text-muted px-2 py-0.5 rounded bg-surface-container border border-black/10 dark:border-outline-variant/40">
+                        {project.statusBadge}
+                      </span>
+                    )}
+                  </div>
                 </div>
+
+                {/* Title */}
+                <div>
+                  <h3 className="font-display text-sm sm:text-[15px] font-semibold text-primary group-hover:text-primary-tint transition-colors tracking-tight">
+                    {project.title}
+                  </h3>
+                  {project.role && (
+                    <span className="font-mono text-[10px] text-text-muted uppercase tracking-wider block mt-0.5">
+                      {project.role}
+                    </span>
+                  )}
+                </div>
+
+                {/* Concise Description */}
+                <p className="text-xs text-on-surface-variant leading-relaxed">
+                  {project.description}
+                </p>
+
+                {/* Key Impact Line */}
+                {project.impact && (
+                  <p className="font-mono text-[11px] text-text-muted flex items-start gap-1.5 pt-0.5">
+                    <span className="text-primary select-none">↳</span>
+                    <span>{project.impact}</span>
+                  </p>
+                )}
               </div>
 
-              {/* Title */}
-              <h3 className="font-display text-sm sm:text-[15px] font-semibold text-primary group-hover:text-primary-tint transition-colors tracking-tight">
-                {project.title}
-              </h3>
-
-              {/* Concise Description */}
-              <p className="text-xs text-on-surface-variant leading-relaxed">
-                {project.description}
-              </p>
+              {/* Bottom Tech Tags */}
+              <div className="pt-3 mt-3 border-t border-black/10 dark:border-outline-variant/30 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-text-muted">
+                {project.tags.map((tag, idx) => (
+                  <span key={tag} className="flex items-center gap-1.5">
+                    <span className="text-on-surface-variant">{tag}</span>
+                    {idx < project.tags.length - 1 && (
+                      <span className="text-outline-variant select-none">·</span>
+                    )}
+                  </span>
+                ))}
+              </div>
             </div>
-
-            {/* Bottom Tech Tags */}
-            <div className="pt-3 mt-3 border-t border-black/10 dark:border-outline-variant/30 flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-text-muted">
-              {project.tags.map((tag, idx) => (
-                <span key={tag} className="flex items-center gap-1.5">
-                  <span className="text-on-surface-variant">{tag}</span>
-                  {idx < project.tags.length - 1 && (
-                    <span className="text-outline-variant select-none">·</span>
-                  )}
-                </span>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
         ))}
       </div>
 

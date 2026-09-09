@@ -2,13 +2,15 @@ export interface Project {
   id: string;
   title: string;
   subtitle: string;
-  category: "AI & Full-Stack" | "MERN Stack" | "Java & SQL" | "Hardware / IoT";
+  category: "Full-Stack Web" | "MERN Stack" | "Java & SQL" | "Hardware / IoT";
   description: string;
   tags: string[];
   liveUrl?: string;
   githubUrl: string;
   highlights?: string[];
   statusBadge?: string;
+  impact?: string;
+  role?: string;
 }
 
 export interface SkillCategory {
@@ -42,20 +44,22 @@ export interface CertificationItem {
 export const PERSONAL_INFO = {
   name: "Koustav Mondal",
   monogram: "KM",
-  tagline: "ENTRY-LEVEL FULL-STACK & WEB DEVELOPER · MERN & JAVA",
+  tagline: "FULL-STACK DEVELOPER · MERN, JAVA, HARDWARE",
   role: "Full-Stack Software Developer",
   status: "Open to Full-Stack Roles",
   statusSub: "Actively interviewing for 2025/2026 roles",
-  location: "Ranaghat / Kolkata, West Bengal, India",
+  location: "Kolkata, West Bengal",
   timezone: "IST (UTC+5:30)",
   educationSummary: "B.Tech ECE · Academy of Technology ('22–'26)",
   phone: "+91 8391875038",
   email: "koustavmondal9641@gmail.com",
-  bio: "I like taking ideas from a blank screen and turning them into products that actually work. I build full-stack applications, AI-powered systems, and engineering projects, working across frontend, backend, databases, APIs, and deployment. I care about writing maintainable code, designing reliable systems, and understanding how things work beneath the surface.",
+  bio: "I like taking ideas from a blank screen and turning them into products that actually work. I build full-stack web applications, AI-integrated workflows, and embedded IoT systems—focusing on clean architecture, high reliability, and intuitive UX.",
+  aboutExtended: "I build software because I enjoy turning an empty editor into a living system that solves real problems. With an academic background in Electronics & Communication Engineering, I bring both a hardware-grounded mindset and full-stack software expertise to my work. Whether architecting backend REST APIs in Java and Node.js, integrating LLMs with persistent context memory, or programming microcontrollers for IoT automation, I prioritize system reliability, clean architecture, and practical utility. I enjoy engineering tools that feel fast, intuitive, and genuinely helpful.",
   socials: {
     github: "https://github.com/Kr4ken99z",
     linkedin: "https://www.linkedin.com/in/koustav07/",
     x: "https://x.com/devkoustav",
+    discord: "https://discord.gg/kEnXQ8Dn",
     email: "mailto:koustavmondal9641@gmail.com",
   },
 };
@@ -123,20 +127,24 @@ export const PROJECTS: Project[] = [
     id: "uma-ai",
     title: "UMA — AI Personal Assistant",
     subtitle: "Conversational assistant with context memory & Gemini API",
-    category: "AI & Full-Stack",
+    category: "Full-Stack Web",
     description:
-      "AI assistant with conversational streaming, context memory, and persistent chat history powered by Gemini API.",
+      "Full-stack AI assistant featuring real-time conversational streaming, context memory, and persistent chat sessions. Engineered with Node.js, PostgreSQL, and Gemini API.",
+    impact: "Provides low-latency contextual dialogue with persistent chat history.",
+    role: "Full-Stack Development",
     tags: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind", "Gemini API"],
     liveUrl: "https://uma-chatbot.vercel.app/",
     githubUrl: "https://github.com/Kr4ken99z/uma-chatbot",
   },
   {
     id: "localx",
-    title: "LocalX — Local Exploration Web App",
-    subtitle: "Discovery platform for places & activities with asynchronous data",
+    title: "LocalX — Exploration Web Platform",
+    subtitle: "Discovery platform for spots & activities with dynamic data",
     category: "MERN Stack",
     description:
-      "Interactive location-discovery platform for nearby spots and activities with third-party API data aggregation.",
+      "Interactive discovery platform aggregating nearby spots and real-time activities via dynamic REST APIs with a modular React frontend and responsive UX.",
+    impact: "Connects local explorers with nearby activities via cached REST endpoints.",
+    role: "Full-Stack Development",
     tags: ["MongoDB", "Express.js", "React", "Node.js", "REST APIs"],
     liveUrl: "https://localx-hazel.vercel.app/",
     githubUrl: "https://github.com/Kr4ken99z/LocalX",
@@ -147,18 +155,22 @@ export const PROJECTS: Project[] = [
     subtitle: "Financial management system with authenticated CRUD",
     category: "Java & SQL",
     description:
-      "Financial management tool with authenticated CRUD operations, REST APIs, and structured MySQL storage.",
+      "Financial tracking tool with authenticated CRUD operations, spending analytics, clean REST endpoints, and structured relational MySQL storage.",
+    impact: "Securely organizes categorized income/expense records with data integrity.",
+    role: "Backend & Database Design",
     tags: ["Java", "MySQL", "JavaScript", "HTML/CSS", "REST APIs"],
     liveUrl: "https://expense-tracker-tau-hazel-98.vercel.app/",
     githubUrl: "https://github.com/Kr4ken99z/expense-tracker",
   },
   {
     id: "jobx",
-    title: "JobX — Job Portal & Hiring Platform",
+    title: "JobX — Hiring & Recruitment Platform",
     subtitle: "Full-stack job discovery & applicant tracking platform",
     category: "MERN Stack",
     description:
-      "Full-stack job discovery and recruitment platform with role filtering and applicant tracking.",
+      "Full-stack recruitment portal with role filtering, application workflows, and recruiter management dashboards built on MongoDB and Express.",
+    impact: "Streamlines hiring pipelines with candidate tracking & search indexing.",
+    role: "Full-Stack Development",
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "REST APIs"],
     githubUrl: "",
     liveUrl: "",
@@ -166,11 +178,13 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "smart-streetlight",
-    title: "Intelligent Street Light for Smart City",
+    title: "Smart City Automated Lighting System",
     subtitle: "IoT automated lighting with ambient & motion sensing",
     category: "Hardware / IoT",
     description:
-      "IoT automated street-lighting system with ambient and motion sensing for real-time energy conservation.",
+      "IoT embedded system utilizing ESP8266 and ESP32-CAM microcontrollers with ambient light and motion sensors for real-time automated electrical power conservation.",
+    impact: "Reduces energy waste via automated sensing and motion-activated illumination.",
+    role: "Embedded Firmware & Hardware",
     tags: ["ESP8266", "ESP32-CAM", "Arduino IDE", "LDR & IR", "Embedded C"],
     githubUrl: "",
     liveUrl: "",
@@ -192,14 +206,14 @@ export const EDUCATION_DATA: EducationItem[] = [
     institution: "Purnanagar Purnachandra High School",
     degree: "Higher Secondary (Class XII)",
     duration: "2020 — 2022",
-    location: "Ranaghat, West Bengal",
+    location: "Kolkata, West Bengal",
     details: "Pure Science stream with Physics, Chemistry, and Mathematics.",
   },
   {
     institution: "Krishnagar Dharmachandra High School",
     degree: "Secondary Education (Class X)",
     duration: "2019 — 2020",
-    location: "Ranaghat, West Bengal",
+    location: "Kolkata, West Bengal",
     details: "General curriculum with distinction in Mathematics and Science.",
   },
 ];

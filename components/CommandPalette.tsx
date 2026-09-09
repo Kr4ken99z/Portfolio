@@ -38,11 +38,20 @@ export default function CommandPalette() {
   const [copied, setCopied] = useState(false);
   const [isMac, setIsMac] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isAtFooter, setIsAtFooter] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
     setIsMac(typeof navigator !== "undefined" && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform));
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      setIsAtFooter(scrollPosition >= documentHeight - 240);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     const handleKeyDown = (e: KeyboardEvent) => {
       // Toggle palette on Ctrl+K or Cmd+K
@@ -58,7 +67,10 @@ export default function CommandPalette() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [isOpen]);
 
   useEffect(() => {
@@ -124,6 +136,17 @@ export default function CommandPalette() {
       subtitle: PERSONAL_INFO.email,
       icon: copied ? Check : Copy,
       action: copyEmail,
+    },
+    {
+      id: "nav-about",
+      category: "Navigation",
+      title: "About Koustav",
+      subtitle: "Background, core competencies, and engineering ethos",
+      icon: Sparkles,
+      action: () => {
+        setIsOpen(false);
+        window.dispatchEvent(new CustomEvent("open-about"));
+      },
     },
     {
       id: "nav-projects",
@@ -235,6 +258,17 @@ export default function CommandPalette() {
       },
       isExternal: true,
     },
+    {
+      id: "action-uma",
+      category: "Links",
+      title: "Ask UMA (AI Assistant)",
+      subtitle: "Instant interactive answers about Koustav's work & skills",
+      icon: Sparkles,
+      action: () => {
+        setIsOpen(false);
+        window.dispatchEvent(new CustomEvent("open-uma"));
+      },
+    },
   ];
 
   const filteredCommands = commands.filter(
@@ -246,16 +280,31 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Floating Bottom-Right Trigger Pill */}
-      <div className="fixed bottom-5 right-5 z-40 select-none">
+      {/* Floating Bottom-Right Trigger Dock */}
+      <div
+        className={`fixed bottom-5 right-5 z-40 select-none flex items-center gap-2 transition-all duration-300 ${
+          isAtFooter ? "translate-y-16 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+        }`}
+      >
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new CustomEvent("open-uma"))}
+          className="group flex items-center gap-2 px-3 py-2 rounded-full bg-surface-container-low/95 backdrop-blur-md border border-black/15 dark:border-outline-variant/60 hover:border-primary text-on-surface shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
+          aria-label="Ask UMA AI Assistant"
+          title="Ask UMA (AI Portfolio Assistant)"
+        >
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+          <span className="font-mono text-xs text-on-surface font-medium">Ask UMA</span>
+        </button>
+
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="group flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-surface-container-low/95 backdrop-blur-md border border-outline-variant/60 hover:border-outline text-on-surface shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
+          className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low/95 backdrop-blur-md border border-black/15 dark:border-outline-variant/60 hover:border-outline text-on-surface shadow-2xl transition-all duration-200 active:scale-95 cursor-pointer"
           aria-label="Open Command Palette"
-          title="Open Command Palette (Ctrl+K)"
+          title="Open Contact / Command Palette (Ctrl+K)"
         >
-          <span className="w-2 h-2 rounded-full bg-text-muted animate-pulse"></span>
+          <span className="w-2 h-2 rounded-full bg-primary"></span>
           <span className="font-mono text-xs text-on-surface font-medium">Contact</span>
           <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded border border-outline-variant/60 bg-surface-container font-mono text-[10px] text-text-muted group-hover:text-on-surface group-hover:border-outline-variant transition-colors">
             <span>{isMac ? "⌘" : "Ctrl"}</span>

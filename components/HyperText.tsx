@@ -9,6 +9,7 @@ interface HyperTextProps {
   delay?: number;
   as?: "span" | "div" | "h1" | "h2" | "h3";
   animateOnHover?: boolean;
+  animateOnLeave?: boolean;
   startOnMount?: boolean;
   trigger?: boolean;
 }
@@ -18,87 +19,109 @@ const DEFAULT_CHARSET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012
 export default function HyperText({
   text,
   className = "",
-  duration = 600,
+  duration = 450,
   delay = 0,
   as: Component = "span",
   animateOnHover = true,
+  animateOnLeave = false,
   startOnMount = false,
   trigger,
 }: HyperTextProps) {
   const [displayText, setDisplayText] = useState<string[]>(() => text.split(""));
-  const [isAnimating, setIsAnimating] = useState(false);
-  const iterations = useRef(0);
-  const animationFrameId = useRef<number | null>(null);
+  const animRef = useRef<number | null>(null);
+  const isRunningRef = useRef(false);
 
-  const startAnimation = useCallback(() => {
-    if (isAnimating) return;
-    iterations.current = 0;
-    setIsAnimating(true);
-  }, [isAnimating]);
-
-  // Initial trigger on mount if requested
-  useEffect(() => {
-    if (startOnMount) {
-      const timer = setTimeout(() => {
-        startAnimation();
-      }, delay);
-      return () => clearTimeout(timer);
+  // Core animation runner: guaranteed to end on the actual text
+  const runScramble = useCallback(() => {
+    if (animRef.current !== null) {
+      cancelAnimationFrame(animRef.current);
     }
-  }, [startOnMount, delay, startAnimation]);
-
-  // External trigger (e.g. parent card hover)
-  useEffect(() => {
-    if (trigger !== undefined && trigger) {
-      startAnimation();
-    }
-  }, [trigger, startAnimation]);
-
-  // When text changes
-  useEffect(() => {
-    setDisplayText(text.split(""));
-  }, [text]);
-
-  // Scramble animation loop
-  useEffect(() => {
-    if (!isAnimating) return;
+    isRunningRef.current = true;
 
     const length = text.length;
     const startTime = performance.now();
 
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
+    const frame = (now: number) => {
+      const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      iterations.current = progress * length;
+      const revealedCount = Math.floor(progress * length);
 
-      const nextChars = text.split("").map((char, index) => {
+      const next = text.split("").map((char, i) => {
         if (char === " ") return " ";
-        if (index <= iterations.current) {
-          return text[index];
-        }
+        if (i < revealedCount || progress >= 1) return text[i];
         return DEFAULT_CHARSET[Math.floor(Math.random() * DEFAULT_CHARSET.length)];
       });
-      setDisplayText(nextChars);
+
+      setDisplayText(next);
 
       if (progress < 1) {
-        animationFrameId.current = requestAnimationFrame(animate);
+        animRef.current = requestAnimationFrame(frame);
       } else {
         setDisplayText(text.split(""));
-        setIsAnimating(false);
+        isRunningRef.current = false;
+        animRef.current = null;
       }
     };
 
-    animationFrameId.current = requestAnimationFrame(animate);
+    animRef.current = requestAnimationFrame(frame);
+  }, [text, duration]);
 
+  // Synchronize with text prop changes
+  useEffect(() => {
+    if (animRef.current !== null) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+      isRunningRef.current = false;
+    }
+    setDisplayText(text.split(""));
+  }, [text]);
+
+  // Handle trigger prop changes (e.g., when logo or name hovered/unhovered)
+  const prevTrigger = useRef(trigger);
+  useEffect(() => {
+    if (trigger !== undefined) {
+      if (prevTrigger.current !== undefined && trigger !== prevTrigger.current) {
+        // Runs on both mouse enter (false -> true) and mouse leave (true -> false)
+        runScramble();
+      } else if (prevTrigger.current === undefined && trigger) {
+        runScramble();
+      }
+      prevTrigger.current = trigger;
+    }
+  }, [trigger, runScramble]);
+
+  // Handle startOnMount
+  useEffect(() => {
+    if (startOnMount) {
+      const t = setTimeout(() => {
+        runScramble();
+      }, delay);
+      return () => clearTimeout(t);
+    }
+  }, [startOnMount, delay, runScramble]);
+
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
-      if (animationFrameId.current !== null) {
-        cancelAnimationFrame(animationFrameId.current);
+      if (animRef.current !== null) {
+        cancelAnimationFrame(animRef.current);
+        animRef.current = null;
+        isRunningRef.current = false;
       }
     };
-  }, [isAnimating, text, duration]);
+  }, []);
 
   const handleMouseEnter = () => {
-    if (animateOnHover && !isAnimating) {
-      startAnimation();
+    // Only self-trigger if animateOnHover is enabled AND not externally driven by trigger
+    if (animateOnHover && trigger === undefined) {
+      runScramble();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Self-trigger on mouse leave if animateOnLeave is enabled AND not externally driven by trigger
+    if (animateOnLeave && trigger === undefined) {
+      runScramble();
     }
   };
 
@@ -106,11 +129,12 @@ export default function HyperText({
     <Component
       className={`inline-flex overflow-hidden cursor-default select-none ${className}`}
       onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {displayText.map((char, idx) => (
         <span
           key={idx}
-          className={`font-mono transition-colors duration-75 inline-block ${
+          className={`font-mono inline-block ${
             char === " " ? "w-[0.3em]" : ""
           }`}
         >
