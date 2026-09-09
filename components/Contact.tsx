@@ -15,9 +15,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 export default function Contact() {
   const [imageError, setImageError] = useState(false);
 
-  // Direct Gmail Compose URL
-  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-    PERSONAL_INFO.email
+  // Direct Mailto Compose URL
+  const emailMailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
+    "Portfolio Inquiry / Opportunity"
   )}`;
 
   return (
@@ -218,18 +218,21 @@ export default function Contact() {
             </div>
             <div className="flex flex-col text-left">
               <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
-              <span className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium select-all">
+              <a
+                href={emailMailtoUrl}
+                className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium hover:text-primary transition-colors select-all"
+                title={`Compose email to ${PERSONAL_INFO.email}`}
+              >
                 {PERSONAL_INFO.email}
-              </span>
+              </a>
             </div>
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <a
-              href={gmailComposeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm"
+              href={emailMailtoUrl}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              title={`Compose email to ${PERSONAL_INFO.email}`}
             >
               <span>Send Mail</span>
               <Send className="w-3 h-3" />

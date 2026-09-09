@@ -36,3 +36,5 @@ next-env.d.ts
 # mockups
 screens/
 design-system/
+
+.vercel

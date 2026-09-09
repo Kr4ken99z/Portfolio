@@ -111,23 +111,18 @@ export default function CommandPalette() {
   };
   const commands: CommandItem[] = [
     {
-      id: "gmail-email",
+      id: "compose-email",
       category: "Email & Connect",
-      title: "Direct Email (Gmail)",
-      subtitle: `Open Gmail compose for ${PERSONAL_INFO.email}`,
+      title: "Compose Email",
+      subtitle: `Open compose for ${PERSONAL_INFO.email}`,
       icon: Mail,
       action: () => {
-        window.open(
-          `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-            PERSONAL_INFO.email
-          )}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
+        window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
+          "Portfolio Inquiry / Opportunity"
+        )}`;
         setIsOpen(false);
       },
       shortcut: "↵",
-      isExternal: true,
     },
     {
       id: "copy-email",

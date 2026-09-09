@@ -27,6 +27,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devkoustav.me"),
   title: "Koustav — Portfolio",
   description:
     "I like taking ideas from a blank screen and turning them into products that actually work. I build full-stack applications, AI-powered systems, and engineering projects, working across frontend, backend, databases, APIs, and deployment.",
@@ -47,6 +48,7 @@ export const metadata: Metadata = {
     description:
       "Entry-level Full Stack Software Developer building reliable web systems, REST APIs, and modern AI-powered applications.",
     type: "website",
+    url: "https://devkoustav.me",
   },
 };
 
