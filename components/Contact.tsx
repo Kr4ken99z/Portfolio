@@ -11,11 +11,11 @@ import {
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`;
+import { useEmailLink } from "@/lib/emailClient";
 
 export default function Contact() {
   const [imageError, setImageError] = useState(false);
+  const emailLink = useEmailLink();
 
   return (
     <section className="py-12 md:py-20 border-b border-outline-variant/30 relative" id="contact">
@@ -216,9 +216,10 @@ export default function Contact() {
             <div className="flex flex-col text-left">
               <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
               <a
-                href={GMAIL_COMPOSE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={emailLink.href}
+                onClick={emailLink.onClick}
+                target={emailLink.target}
+                rel={emailLink.rel}
                 className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium hover:text-primary transition-colors select-all cursor-pointer"
                 title={`Compose email to ${PERSONAL_INFO.email}`}
               >
@@ -229,9 +230,10 @@ export default function Contact() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <a
-              href={GMAIL_COMPOSE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={emailLink.href}
+              onClick={emailLink.onClick}
+              target={emailLink.target}
+              rel={emailLink.rel}
               className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer"
               title={`Compose email to ${PERSONAL_INFO.email}`}
             >

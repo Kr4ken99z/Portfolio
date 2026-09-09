@@ -2,8 +2,10 @@
 
 import { Github, Linkedin, Mail } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import { useEmailLink } from "@/lib/emailClient";
 
 export default function Footer() {
+  const emailLink = useEmailLink();
   const footerNavLinks = [
     { label: "About", href: "#about", isAction: true },
     { label: "Projects", href: "#projects" },
@@ -84,9 +86,10 @@ export default function Footer() {
           </a>
 
           <a
-            href={`https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={emailLink.href}
+            onClick={emailLink.onClick}
+            target={emailLink.target}
+            rel={emailLink.rel}
             aria-label="Send Email"
             title="Compose Email"
             className="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"

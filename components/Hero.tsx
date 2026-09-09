@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-
 import { motion, type Variants } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import HyperText from "@/components/HyperText";
+import { useEmailLink } from "@/lib/emailClient";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -35,6 +36,7 @@ export default function Hero() {
   const [localTime, setLocalTime] = useState<string>("");
   const [imageError, setImageError] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
+  const emailLink = useEmailLink();
 
   useEffect(() => {
     setMounted(true);
@@ -164,9 +166,10 @@ export default function Hero() {
             </a>
 
             <a
-              href={`https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={emailLink.href}
+              onClick={emailLink.onClick}
+              target={emailLink.target}
+              rel={emailLink.rel}
               aria-label="Send Email"
               title="Compose Email"
               className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm cursor-pointer"

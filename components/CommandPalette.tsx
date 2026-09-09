@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import confetti from "canvas-confetti";
+import { openEmail } from "@/lib/emailClient";
 
 interface CommandItem {
   id: string;
@@ -117,11 +118,7 @@ export default function CommandPalette() {
       subtitle: `Compose email to ${PERSONAL_INFO.email}`,
       icon: Mail,
       action: () => {
-        window.open(
-          `https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`,
-          "_blank",
-          "noopener,noreferrer"
-        );
+        openEmail();
         setIsOpen(false);
       },
       shortcut: "↵",
