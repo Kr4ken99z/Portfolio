@@ -113,16 +113,26 @@ export default function CommandPalette() {
     {
       id: "compose-email",
       category: "Email & Connect",
-      title: "Compose Email",
-      subtitle: `Open compose for ${PERSONAL_INFO.email}`,
+      title: "Send Email (Compose)",
+      subtitle: `Compose email to ${PERSONAL_INFO.email}`,
       icon: Mail,
       action: () => {
-        window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
-          "Portfolio Inquiry / Opportunity"
-        )}`;
+        const isMobile =
+          typeof navigator !== "undefined" &&
+          /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href = `mailto:${PERSONAL_INFO.email}`;
+        } else {
+          window.open(
+            `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
+            "_blank",
+            "noopener,noreferrer"
+          );
+        }
         setIsOpen(false);
       },
       shortcut: "↵",
+      isExternal: true,
     },
     {
       id: "copy-email",

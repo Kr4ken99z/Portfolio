@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   FileText,
@@ -14,11 +14,38 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Contact() {
   const [imageError, setImageError] = useState(false);
+  const [mailHref, setMailHref] = useState(
+    `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`
+  );
 
-  // Direct Mailto Compose URL
-  const emailMailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
-    "Portfolio Inquiry / Opportunity"
-  )}`;
+  useEffect(() => {
+    const isMobile =
+      typeof navigator !== "undefined" &&
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      setMailHref(`mailto:${PERSONAL_INFO.email}`);
+    } else {
+      setMailHref(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`
+      );
+    }
+  }, []);
+
+  const handleSendMail = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const isMobile =
+      typeof navigator !== "undefined" &&
+      /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = `mailto:${PERSONAL_INFO.email}`;
+    } else {
+      e.preventDefault();
+      window.open(
+        `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+  };
 
   return (
     <section className="py-12 md:py-20 border-b border-outline-variant/30 relative" id="contact">
@@ -219,8 +246,9 @@ export default function Contact() {
             <div className="flex flex-col text-left">
               <span className="font-mono text-[11px] text-text-muted">Direct Email</span>
               <a
-                href={emailMailtoUrl}
-                className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium hover:text-primary transition-colors select-all"
+                href={mailHref}
+                onClick={handleSendMail}
+                className="font-mono text-xs sm:text-sm text-neutral-900 dark:text-on-surface font-medium hover:text-primary transition-colors select-all cursor-pointer"
                 title={`Compose email to ${PERSONAL_INFO.email}`}
               >
                 {PERSONAL_INFO.email}
@@ -230,8 +258,11 @@ export default function Contact() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <a
-              href={emailMailtoUrl}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              href={mailHref}
+              onClick={handleSendMail}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-mono text-xs font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer"
               title={`Compose email to ${PERSONAL_INFO.email}`}
             >
               <span>Send Mail</span>

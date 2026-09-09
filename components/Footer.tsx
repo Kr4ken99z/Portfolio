@@ -84,9 +84,23 @@ export default function Footer() {
           </a>
 
           <a
-            href={PERSONAL_INFO.socials.email}
+            href={`mailto:${PERSONAL_INFO.email}`}
+            onClick={(e) => {
+              const isMobile =
+                typeof navigator !== "undefined" &&
+                /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+              if (!isMobile) {
+                e.preventDefault();
+                window.open(
+                  `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
+                  "_blank",
+                  "noopener,noreferrer"
+                );
+              }
+            }}
             aria-label="Send Email"
-            className="text-on-surface-variant hover:text-on-surface transition-colors"
+            title="Compose Email"
+            className="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"
           >
             <Mail className="w-4 h-4" />
           </a>

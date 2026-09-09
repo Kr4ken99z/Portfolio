@@ -164,9 +164,23 @@ export default function Hero() {
             </a>
 
             <a
-              href={PERSONAL_INFO.socials.email}
+              href={`mailto:${PERSONAL_INFO.email}`}
+              onClick={(e) => {
+                const isMobile =
+                  typeof navigator !== "undefined" &&
+                  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                if (!isMobile) {
+                  e.preventDefault();
+                  window.open(
+                    `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
+                }
+              }}
               aria-label="Send Email"
-              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm"
+              title="Compose Email"
+              className="w-8 h-8 rounded-lg bg-surface-container-low border border-black/15 dark:border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:border-black/35 transition-all active:scale-95 shadow-sm cursor-pointer"
             >
               <Mail className="w-4 h-4" />
             </a>
