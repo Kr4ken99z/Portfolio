@@ -84,20 +84,9 @@ export default function Footer() {
           </a>
 
           <a
-            href={`mailto:${PERSONAL_INFO.email}`}
-            onClick={(e) => {
-              const isMobile =
-                typeof navigator !== "undefined" &&
-                /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-              if (!isMobile) {
-                e.preventDefault();
-                window.open(
-                  `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
-                  "_blank",
-                  "noopener,noreferrer"
-                );
-              }
-            }}
+            href={`https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Send Email"
             title="Compose Email"
             className="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer"

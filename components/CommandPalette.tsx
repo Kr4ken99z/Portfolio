@@ -117,18 +117,11 @@ export default function CommandPalette() {
       subtitle: `Compose email to ${PERSONAL_INFO.email}`,
       icon: Mail,
       action: () => {
-        const isMobile =
-          typeof navigator !== "undefined" &&
-          /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-          window.location.href = `mailto:${PERSONAL_INFO.email}`;
-        } else {
-          window.open(
-            `https://mail.google.com/mail/?view=cm&fs=1&to=${PERSONAL_INFO.email}`,
-            "_blank",
-            "noopener,noreferrer"
-          );
-        }
+        window.open(
+          `https://mail.google.com/mail/?view=cm&to=${PERSONAL_INFO.email}`,
+          "_blank",
+          "noopener,noreferrer"
+        );
         setIsOpen(false);
       },
       shortcut: "↵",

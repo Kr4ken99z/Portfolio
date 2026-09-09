@@ -102,7 +102,7 @@ function getUmaAnswer(query: string): { text: string; links?: { label: string; u
         { label: "Send Message Now", url: "#contact" },
         {
           label: "Compose in Gmail ↗",
-          url: "https://mail.google.com/mail/?view=cm&fs=1&to=koustavmondal9641@gmail.com",
+          url: "https://mail.google.com/mail/?view=cm&to=koustavmondal9641@gmail.com",
           external: true,
         },
       ],
